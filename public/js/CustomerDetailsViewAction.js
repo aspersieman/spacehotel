@@ -11,5 +11,4 @@ $(document).ready(function() {
     $("#lnkRefreshCaptcha").click(function(e){
         customerdetailsview.refreshCaptcha();
     });
-    
 });

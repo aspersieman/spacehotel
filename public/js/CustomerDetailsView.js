@@ -1,17 +1,5 @@
 this.CustomerDetailsView = function() {
-    this.showHide = function(shID) {
-        if (document.getElementById(shID)) {
-            if (document.getElementById(shID+'-show').style.display != 'none') {
-                document.getElementById(shID+'-show').style.display = 'none';
-                document.getElementById(shID).style.display = 'block';
-            }
-            else {
-                document.getElementById(shID+'-show').style.display = 'inline';
-                document.getElementById(shID).style.display = 'none';
-            }
-        }
-    }
-
+    // Check whether the terms and conditions checkbox is checked
     this.validateForm = function()
     {
         if ($("#chbTermsAndConditions:checked").length == 0) {
@@ -22,6 +10,7 @@ this.CustomerDetailsView = function() {
         }
     }
 
+    // Refresh the captcha image content
     this.refreshCaptcha = function() {
         var img = document.images['captchaimg'];
         img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.random()*1000;

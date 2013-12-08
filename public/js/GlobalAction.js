@@ -7,5 +7,6 @@ $(document).ready(function() {
     // Bind a replacement function to the required fields
     global.addConstraints();
 
+    // If the error message is displayed remove it after a while
     $(".err").delay(3200).fadeOut(300);
 });

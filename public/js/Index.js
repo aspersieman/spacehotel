@@ -1,10 +1,6 @@
 this.Index = function() {
     this.initAttempts = 0;
 
-    this.makeTwoChars = function(inp) {
-        return String(inp).length < 2 ? "0" + inp : inp;
-    }
-
     this.initialiseInputs = function() {
         // Clear any old values from the inputs (that might be cached by the browser after a page reload)
         document.getElementById("sd").value = "";
@@ -50,20 +46,5 @@ this.Index = function() {
     this.removeInputEvents = function() {
         // Remove the onchange event handler set within the function initialiseInputs
         datePickerController.removeEvent(document.getElementById("sd"), "change", this.setReservationDates);
-    }
-
-    this.validateForm = function () {
-        var x=document.forms["index"]["start"].value;
-        if (x==null || x=="")
-        {
-            alert("you must enter your check in Date(click the calendar icon)");
-            return false;
-        }
-        var y=document.forms["index"]["end"].value;
-        if (y==null || y=="")
-        {
-            alert("you must enter your check out Date(click the calendar icon)");
-            return false;
-        }
     }
 }

@@ -14,7 +14,7 @@
         Contact Number: <?php echo $page->reservation['contact']; ?><br />
         <br />
         <strong>Payment Information</strong><br />
-        <!-- TODO -->
+        <!-- TODO include the payment information here -->
         <br>
         <br />
         <strong>Reservation Details</strong><br />

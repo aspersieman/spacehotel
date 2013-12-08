@@ -2,174 +2,6 @@ function Global(baseURL) {
     // Form validation collection
     this.validForms = new Array();
 
-    this.getDatetimeSettings = function() {
-        var settings = {
-            showSecond: global.showSecond,
-            dateFormat: global.dateFormat,
-            timeFormat: global.timeFormat,
-            stepHour: global.hourStep,
-            stepMinute: global.minuteStep,
-            stepSecond: global.secondStep,
-            hourGrid: global.hourGrid,
-            minuteGrid: global.minuteGrid,
-            secondGrid: global.secondGrid
-        };
-
-        return settings;
-    }
-
-    this.getDateSettings = function() {
-        var settings = {
-            dateFormat: global.dateFormat,
-        };
-
-        return settings;
-    }
-
-    this.displaySuccessMessage = function(message) {
-        // Get the super container
-        var container = $('.current_message_container');
-        // Remove the previous error message
-        container.find('.success').remove();
-        // Clone the message container
-        var messageHolder = $('.success').clone();
-        // Replace the MESSAGE variable with the actual message variable
-        var messageHolderContent = messageHolder.html().replace("MESSAGE", message);
-        // Replace the new content with the container with the new content
-        messageHolder.html(messageHolderContent);
-        // append the cloned message holder to the container
-        container.append(messageHolder);
-        // Show the super container, and the cloned message container
-        messageHolder.slideDown("slow");
-        // Attach a delayed actionlistener to close the message box when the user does nothing
-        messageHolder.delay(global.messageTimeout).slideUp("slow", function() {
-            messageHolder.remove();
-        });
-        // Attach an actionlistener to the closing button, which is linked to the parent element
-        messageHolder.find('.btn').click(function() {
-            var removalEl = $(this).parent().parent();
-            removalEl.remove();
-        });
-        // Make the page jump to the error message
-        $(document).scrollTop($(".current_message_container").offset().top);
-    }
-
-    this.displayWarningMessage = function(message) {
-        // Get the super container
-        var container = $('.current_message_container');
-        // Remove the previous error message
-        container.find('.warning').remove();
-        // Clone the message container
-        var messageHolder = $('.warning').clone();
-        // Replace the MESSAGE variable with the actual message variable
-        var messageHolderContent = messageHolder.html().replace("MESSAGE", message);
-        // Replace the new content with the container with the new content
-        messageHolder.html(messageHolderContent);
-        // append the cloned message holder to the container
-        container.append(messageHolder);
-        // Show the super container, and the cloned message container
-        messageHolder.slideDown("slow");
-        // Attach a delayed actionlistener to close the message box when the user does nothing
-        messageHolder.delay(global.messageTimeout).slideUp("slow", function() {
-            messageHolder.remove();
-        });
-        // Attach an actionlistener to the closing button, which is linked to the parent element
-        messageHolder.find('.btn').click(function() {
-            var removalEl = $(this).parent().parent();
-            removalEl.remove();
-        });
-        // Make the page jump to the error message
-        $(document).scrollTop($(".current_message_container").offset().top);
-    }
-
-    this.displayErrorMessage = function(message) {
-        // Get the super container
-        var container = $('.current_message_container');
-        if (container.length > 1) {
-            container = $(container[container.length - 1]);
-            for (var i = 0; i < (container.length - 2); i ++) {
-                $(container[i]).remove();
-                $(container[i]).find('.error').remove();
-            }
-        }
-        // Remove the previous error message
-        container.find('.error').remove();
-        // Clone the message container
-        var messageHolder = $('.error').clone();
-        if (messageHolder.length > 1) {
-            messageHolder = $(messageHolder[messageHolder.length - 1]);
-            for (var i = 0; i < (messageHolder.length - 2); i ++) {
-                $(messageHolder[i]).remove();
-                $(messageHolder[i]).find('.error').remove();
-            }
-        }
-        // Replace the MESSAGE variable with the actual message variable
-        var messageHolderContent = messageHolder.html().replace("MESSAGE", message);
-        // Replace the new content with the container with the new content
-        messageHolder.html(messageHolderContent);
-        // append the cloned message holder to the container
-        container.append(messageHolder);
-        // Show the super container, and the cloned message container
-        messageHolder.slideDown("slow");
-        // Attach a delayed actionlistener to close the message box when the user does nothing
-        messageHolder.delay(global.messageTimeout).slideUp("slow", function() {
-            messageHolder.remove();
-        });
-        // Attach an actionlistener to the closing button, which is linked to the parent element
-        messageHolder.find('.btn').click(function() {
-            var removalEl = $(this).parent().parent();
-            removalEl.remove();
-        });
-        // Make the page jump to the error message
-        $(document).scrollTop($(".current_message_container").offset().top);
-    }
-
-    /*
-     * Displays a growl message error using the blockUI plugin
-     */
-    this.growlErrorMessage = function(message) {
-        $.jGrowl(message, { header: 'Error' });
-    }
-
-    /*
-     * Displays a growl message using the blockUI plugin
-     */
-    this.growlMessage = function(message, headertext) {
-        if (!headertext) {
-            headertext = "Notice";
-        }
-        $.jGrowl(message, { header: headertext });
-    }
-
-    /*
-     * While the page is being processed/loading this method can "block"
-     * the user from accessing it by dimming the page, showing a message
-     * at the top and displaying a loading icon (wheel of death)
-     */
-    this.blockPage = function(message) {
-        $.blockUI({ message: message, css: { 
-            border: 'none', 
-            color: '#FFFFFF',
-            padding: '15px', 
-            baseZ: 2000,
-            width:"100%",
-            height:"100%",
-            top: '0%', 
-            left: '0%',
-            backgroundColor: '#000', 
-            '-webkit-border-radius': '10px', 
-            '-moz-border-radius': '10px', 
-            opacity: .5, 
-            color: '#fff'
-        } 
-        }); 
-
-        $(".blockUI.blockMsg.blockPage").addClass("blockui_big_message");
-        $('.blockOverlay').click($.unblockUI);
-        $('.blockUI').click($.unblockUI);
-        $(".blockUI.blockMsg.blockPage").addClass("field_loading_big");
-    }
-
     /**
      * Validates a given element based on its value, and given regex it needs
      * to comply with. The appropriate classes will be coupled with the element.
@@ -203,6 +35,7 @@ function Global(baseURL) {
             return false;
         }
     }
+
     /**
      * Generic form validation. Loops through all forms and checks if any of the
      * elements within the form contain the 'validate_error' class. If they do, 
@@ -226,11 +59,6 @@ function Global(baseURL) {
                 });
             }
         });
-    }
-
-    this.getNumberOfDays = function(year, month) {
-        var isLeap = ((year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0));
-        return [31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
     }
 
     this.addConstraintStringCapitalize = function(element) {
@@ -324,32 +152,6 @@ function Global(baseURL) {
                 }
             }
         });
-    }
-
-    this.addSpacer = function(element, position) {
-        var filler = $("<div>");
-        filler.addClass("spacer");
-        filler.css("clear", "both");
-        if (position == "before")
-            filler.insertBefore(element);
-        if (position == "after")
-            filler.insertAfter(element);
-    }
-
-    this.addBreak = function(element, position) {
-        var br = $("<br />");
-        if (position == "before")
-            br.insertBefore(element);
-        if (position == "after")
-            br.insertAfter(element);
-    }
-
-    this.addDottedLine = function(element, position) {
-        var dottedLineElement = $("<div class='spacer_dotted'></div>");
-        if (position == "before")
-            dottedLineElement.insertBefore(element);
-        if (position == "after")
-            dottedLineElement.insertAfter(element);
     }
 
     this.addValidationString = function(element) {
@@ -523,6 +325,9 @@ function Global(baseURL) {
         $(element).trigger("keyup");
     }
 
+    /* 
+     * Call all the validation methods
+     */
     this.validateAll = function () {
         // Validate integer fields
         this.addValidationFloatOptional('.validate_float_optional');
@@ -564,6 +369,9 @@ function Global(baseURL) {
         this.addValidationTelephoneNumberOptional('.validate_telephone_optional');
     }
 
+    /* 
+     * Add all the constraints to all controls
+     */
     this.addConstraints = function () {
         global.addConstraintStringInitialize('.constraint_initialize');
         global.addConstraintStringCapitalize('.constraint_capitalize');
@@ -577,58 +385,5 @@ function Global(baseURL) {
 
         // Bind key hooking code to avoid the alphabet in float fields
         global.addConstraintFloat('.constraint_float');
-    }
-
-    this.jumpToElement = function() {
-        var new_position = $('#add_availability_container').offset();
-        window.scrollTo(new_position.left, new_position.top);
-    }
-
-    this.showPanelStatusHistory = function (entityName, entityId) {
-        var dlgStatusLog = $("<div id='divStatusLog'>").dialog({
-            modal: true,
-            open: function ()
-            {
-                $("span.ui-dialog-title").addClass("field_loading");
-                $("span.ui-dialog-title").width(100);
-                $("span.ui-dialog-title").height(16);
-                $(this).load(global.getBaseURL() + "/panel/statuslog/name/" + entityName  + "/id/" + entityId);
-            },         
-            height: 400,
-            width: 600,
-            title: global.STATUS_LOG_HEADING
-        });
-        dlgStatusLog.dialog("open");
-    }
-    
-    this.reloadUrl = function (urlString) {
-        if (urlString.indexOf("?") == -1) {
-            queryStringStart = urlString.length;
-        } else {
-            queryStringStart = urlString.indexOf("?");
-        }
-        urlStringBase = urlString.substring(0, queryStringStart) + '?' + Math.round(Math.random() * 1000);
-        return urlStringBase;
-    }
-
-    this.formatCurrency = function(symbol, amount) {
-       aDigits = parseFloat(amount).toFixed(2).split(".");
-       aDigits[0] = aDigits[0].split("").reverse().join("").replace(/(\d{3})(?=\d)/g,"$1,").split("").reverse().join("");
-       return symbol + aDigits.join(".");
-    }
-
-    this.datePickerAvailableDate = function (date, availableDates) {
-        dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-        if ($.inArray(dmy, availableDates) == 1) {
-            return [true, "","Available"];
-        } else {
-            return [false,"","unAvailable"];
-        }
-    }
-
-    this.openWindow = function(height, width, url) {
-        leftOffset = (screen.width/2) - width/2;
-        topOffset = (screen.height/2) - height/2;
-        window.open(url, this.target, 'left=' + leftOffset + ',top=' + topOffset + ',width=' + width + ',height=' + height + ',resizable,scrollbars=yes');
     }
 }

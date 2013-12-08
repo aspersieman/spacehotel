@@ -1,9 +1,7 @@
-<script src='public/js/ReservationCancelView.js' type='text/javascript'>
-</script>
-<script src='public/js/ReservationCancelViewAction.js' type='text/javascript'>
-</script>
+<script src='public/js/ReservationCancelView.js' type='text/javascript'> </script>
+<script src='public/js/ReservationCancelViewAction.js' type='text/javascript'> </script>
 <script type='text/javascript'>
-var reservationcancelview = new ReservationCancelView();
+    var reservationcancelview = new ReservationCancelView();
 </script>
 <div class='reservation_heading'>
     <h2>Cancel Reservation</h2>
