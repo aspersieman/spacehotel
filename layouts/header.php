@@ -17,7 +17,6 @@
     </script>
     <script src="<?php echo APP_ROOT; ?>/public/js/library/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="<?php echo APP_ROOT; ?>/public/js/library/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
-    <script src="<?php echo APP_ROOT; ?>/public/js/library/jquery-easing.1.2.pack.js" type="text/javascript"></script>
     <script src="<?php echo APP_ROOT; ?>/public/js/library/jquery.easing.1.3.js" type="text/javascript"></script>
     <script src="<?php echo APP_ROOT; ?>/public/js/library/jquery.coda-slider-3.0.min.js" type="text/javascript"></script>
     <script src="<?php echo APP_ROOT; ?>/public/js/library/datepicker.js" type="text/javascript"></script>
@@ -33,5 +32,5 @@
     <!-- Initialise javascript }}} -->
 </head>
 <body>
-<!-- Main wrapper {{{ -->
 <div class="mainwrapper">
+<!-- Rest of the body content will be inserted here -->

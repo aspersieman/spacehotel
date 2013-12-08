@@ -1,5 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <!-- Basic header to be used by panels and modal dialogs -->
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>Admin</title>
     <link rel="icon" href="public/img/logopreview.png" type="image" />
@@ -27,3 +29,4 @@
     <!-- Initialise javascript }}} -->
 </head>
 <body>
+<!-- Rest of the body content will be inserted here -->

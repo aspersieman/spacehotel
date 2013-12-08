@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * config.php - main configuration file used for site
+ * PHP Version 5.3.+
+ * @package spacehotel
+ * @author Nicolaas van der Merwe <nicolvandermerwe@gmail.com>
+ * @copyright 2013 Nicolaas van der Merwe
+ */
 define('APP_ROOT', "/spacehotel");
 define('BASE_PATH', dirname(realpath(__FILE__)) . '/../');
 define('PAGE_PATH', BASE_PATH . 'pages/');
