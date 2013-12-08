@@ -1,0 +1,31 @@
+/* This CSS is used for the Show/Hide functionality. */
+.more {
+    display: none;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666; }
+a.showLink, a.hideLink {
+    text-decoration: none;
+    color: #36f;
+    padding-left: 8px;
+    background: transparent url(down.gif) no-repeat left; }
+a.hideLink {
+    background: transparent url(up.gif) no-repeat left; }
+a.showLink:hover, a.hideLink:hover {
+    border-bottom: 1px dotted #36f; }
+.style5 {color: #FF9900}
+a:link {
+	color: #0000FF;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #FFFF00;
+}
+a:active {
+	text-decoration: none;
+}
+ #errmsg { color:red; }
+ #errmsg1 { color:red; }

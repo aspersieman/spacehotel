@@ -1,0 +1,2 @@
+this.ReservationCancelView = function() {
+}
