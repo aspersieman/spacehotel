@@ -1,7 +1,17 @@
 <?php
+
+/**
+ * customerdetails.php - Get the personal details from the customer
+ * PHP Version 5.3.+
+ * @package spacehotel
+ * @author Nicolaas van der Merwe <nicolvandermerwe@gmail.com>
+ * @copyright 2013 Nicolaas van der Merwe
+ */
 require_once '../lib/db.php';
 require_once '../lib/stdlib.php';
 
+// Start the session to store what the customer has already entered 
+// in the session
 session_start();
 
 $site = new csite();
@@ -11,6 +21,7 @@ $site->addFooter(LAYOUT_PATH . "footer.php");
 $page = new cpage(basename(__FILE__));
 $site->setPage($page);
 
+// Store the variables to pass to the view
 $page->bookingArrivalDate = $_SESSION['bookingArrivalDate'];
 $page->bookingDepartureDate = $_SESSION['bookingDepartureDate'];
 $page->bookingNumberAdults = $_SESSION['bookingNumberAdults'];

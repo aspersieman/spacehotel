@@ -3,16 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Cancelation Policy</title>
-<style type="text/css">
-<!--
-.view{
-    overflow: auto;
-    float:right;
-    width: 680px; height: 390px;
-    margin:0 auto;
-}
--->
-</style>
 </head>
 <body>
 <div class="view">
@@ -20,7 +10,6 @@
     <div id="bodyContent">
         <div id="contentSub">
         </div>
-        <!-- start content -->
         <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
             <p>
             <br />

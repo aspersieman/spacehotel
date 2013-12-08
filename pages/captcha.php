@@ -1,7 +1,7 @@
 <?php 
 /*
 *
-* this code is based on captcha code by Simon Jarvis 
+* This code is based on captcha code by Simon Jarvis 
 * http://www.white-hat-web-design.co.uk/articles/php-captcha.php
 *
 * This program is free software; you can redistribute it and/or 

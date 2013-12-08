@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * payment.php - Create the reservation record, send confirmation email 
+ * and display the reservation summary to the user
+ * PHP Version 5.3.+
+ * @package spacehotel
+ * @author Nicolaas van der Merwe <nicolvandermerwe@gmail.com>
+ * @copyright 2013 Nicolaas van der Merwe
+ */
 require_once '../lib/stdlib.php';
 require_once '../lib/db.php';
 
@@ -11,6 +20,7 @@ $site->addFooter(LAYOUT_PATH . "footer.php");
 $page = new cpage(basename(__FILE__));
 $site->setPage($page);
 
+// Check for any errors and return if needed
 $errmsg_arr = array();
 $errflag = false;
 if(empty($_SESSION['captchaCode'] ) ||
@@ -24,10 +34,12 @@ if($errflag) {
     header("location: customerdetails.php");
     exit();
 }
+// If this isn't posted to from wrong area
 if (!isset($_POST['Submit'])) {
     $errmsg_arr = array();
     $errflag = false;
 
+    // Create new customer user password
     $confirmation = createRandomPassword();
     $page->bookingArrivalDate = $_SESSION['bookingArrivalDate'];
     $page->bookingDepartureDate = $_SESSION['bookingDepartureDate'];
@@ -55,6 +67,7 @@ if (!isset($_POST['Submit'])) {
 
     $page->amountPayable = $rate * $page->bookingNumberDays * $page->bookingNumberRooms;
 
+    // Set up the email fields and body
     $subject = "Reservation Notification";
     $from = EMAIL_ADDRESS;
     $body = "<h1>This is your reservation notification for your stay at Space Hotel.</h1>";
@@ -77,14 +90,19 @@ if (!isset($_POST['Submit'])) {
         "<strong>Confirmation Number:</strong> $confirmation<br/> ";	
     $body .= "<br/><br/>Please enjoy your stay.";
 
+    // This is included here so that the class autoloader doesn't interfere 
+    // with the one required by RedbeanPHP
     require_once '../lib/PHPMailerAutoload.php';
     $mail = new PHPMailer;
 
+    // Create an SMPT email
     $mail->isSMTP();
+    // Use varialbles defined in config.php
     $mail->Host = EMAIL_HOST;
     $mail->SMTPAuth = true;
     $mail->Username = EMAIL_ADDRESS;
     $mail->Password = EMAIL_PASSWORD;
+    // Use tls for security
     $mail->SMTPSecure = 'tls';
     $mail->isHTML(true);
 
@@ -98,12 +116,15 @@ if (!isset($_POST['Submit'])) {
     $mail->Body = $body;
     $mail->AltBody = $body;
 
+    // TODO If email isn't sent, determine if email address is wrong if it is 
+    // return to the previous page and inform the user to check it, if it is 
+    // correct check if there is a network issue and try again
     if(!$mail->send()) {
        echo 'Message could not be sent.';
        echo 'Mailer Error: ' . $mail->ErrorInfo;
-       //exit;
     }
 
+    // Create the reservation record
     $sqlInsertReservation = "INSERT INTO reservation ( "
     . "       arrival_date, "
     . "       departure_date, "
@@ -173,6 +194,7 @@ if (!isset($_POST['Submit'])) {
           ":confirmation_code" => $confirmation
         )
     );
+    // Create the inventory record
     R::exec(
         "INSERT INTO room_inventory (arrival_date, departure_date, quantity_reserve, room_id, confirmation_code, status) VALUES (:arrival, :departure, :quantity_reserve, :room_id, :confirmation_code, :status)",
         Array(

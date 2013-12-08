@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * roomselect.php - The user gets to select the room they want to reserve
+ * PHP Version 5.3.+
+ * @package spacehotel
+ * @author Nicolaas van der Merwe <nicolvandermerwe@gmail.com>
+ * @copyright 2013 Nicolaas van der Merwe
+ */
 require_once '../lib/db.php';
 require_once '../lib/stdlib.php';
 

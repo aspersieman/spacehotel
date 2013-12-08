@@ -1,26 +1,21 @@
 <?php
+
+/**
+ * login.php - Log the user in to the back end
+ * PHP Version 5.3.+
+ * @package spacehotel
+ * @author Nicolaas van der Merwe <nicolvandermerwe@gmail.com>
+ * @copyright 2013 Nicolaas van der Merwe
+ */
 require_once '../lib/db.php';
 require_once '../lib/stdlib.php';
 
-//Start session
 session_start();
 
-//Function to sanitize values received from the form. Prevents SQL injection
-function clean($str) {
-    $str = @trim($str);
-    if(get_magic_quotes_gpc()) {
-        $str = stripslashes($str);
-    }
-    return mysql_real_escape_string($str);
-}
+$userName = $_POST['user'];
+$password = $_POST['password'];
 
-//Sanitize the POST values
-$userName = clean($_POST['user']);
-$password = clean($_POST['password']);
-
-//Create query
-$qry="";
-$result=mysql_query($qry);
+// Get the user record
 $user = R::getAll(
     "SELECT * FROM user WHERE username=? AND password=?", 
     Array($userName, $password)    
@@ -34,15 +29,17 @@ if($user) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_position'] = $user['role'];
         session_write_close();
+        // Go to the admin back end
         header("location: admin_index.php");
         exit();
     }else {
-        //Login failed
-        header("location: admin.php");
+        //Login failed - log the user out (clear the session)
+        header("location: logout.php");
         exit();
     }
 }else {
-    header("location: admin.php");
+    //User doesn't exist - log the user out (clear the session)
+    header("location: logout.php");
     exit();
 }
 ?>

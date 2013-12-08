@@ -1,8 +1,17 @@
 <?php
+
+/**
+ * reservationsearchresults.php - Show the search results to the user
+ * PHP Version 5.3.+
+ * @package spacehotel
+ * @author Nicolaas van der Merwe <nicolvandermerwe@gmail.com>
+ * @copyright 2013 Nicolaas van der Merwe
+ */
 require_once '../lib/db.php';
 require_once '../lib/stdlib.php';
 
-$site = new csite();
+// User needs to be logged in (true passed)
+$site = new csite(true);
 $site->addHeader(LAYOUT_PATH . "basic_header.php");
 $site->addFooter(LAYOUT_PATH . "basic_footer.php");
 $page = new cpage(basename(__FILE__));
@@ -19,6 +28,7 @@ $sql = "" .
     " FROM reservation " .
     " WHERE 1 = 1";
 $parameters = Array();
+// Set only those parameters that have been entered
 if ($arrivalDate) {
     $sql .= " AND arrival_date = :arrivalDate ";
     $parameters[":arrivalDate"] = $arrivalDate;

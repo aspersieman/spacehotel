@@ -1,4 +1,12 @@
 <?php
+/**
+ * checkout.php - To check out a customer from a room they have checked in
+ * to before. 
+ * PHP Version 5.3.+
+ * @package spacehotel
+ * @author Nicolaas van der Merwe <nicolvandermerwe@gmail.com>
+ * @copyright 2013 Nicolaas van der Merwe
+ */
 if (isset($_GET['resid'])) {
     require_once '../lib/db.php';
     require_once '../lib/stdlib.php';
